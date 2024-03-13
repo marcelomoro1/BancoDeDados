@@ -1,2 +1,2 @@
 # BancoDeDados
-Cadeira do zamberlanis
+Cadeira
