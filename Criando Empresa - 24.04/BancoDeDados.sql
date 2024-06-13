@@ -160,5 +160,16 @@ SELECT Pnome, Unome, Endereco FROM FUNCIONARIO INNER JOIN DEPARTAMENTO ON FUNCIO
 SELECT Pnome, Unome FROM FUNCIONARIO, PROJETO, TRABALHA_EM WHERE TRABALHA_EM.Fcpf = FUNCIONARIO.Cpf AND TRABALHA_EM.Pnr = PROJETO.Projnumero AND PROJETO.Projnome = 'ProdutoX'; #SEM INNER JOIN
 SELECT Pnome, Unome FROM FUNCIONARIO INNER JOIN TRABALHA_EM ON FUNCIONARIO.Cpf = TRABALHA_EM.Fcpf INNER JOIN PROJETO ON TRABALHA_EM.Pnr = PROJETO.Projnumero WHERE PROJETO.Projnome = 'ProdutoX'; #COM INNER JOIN
 
-#Encontrar os dados dos gerentes que lideram os projetos com nome de Mauá
 SELECT Projnumero, Dnumero, Unome, Endereco, Datanasc FROM FUNCIONARIO INNER JOIN DEPARTAMENTO ON FUNCIONARIO.Cpf = DEPARTAMENTO.Cpf_gerente INNER JOIN PROJETO ON DEPARTAMENTO.Dnumero = PROJETO.Dnum WHERE PROJETO.Projlocal = 'Mauá';
+
+#LEFT JOIN
+#Quero pegar o ultimo nome dos funcionarios e o ultimo nome dos seus gerentes
+SELECT F.Unome as 'Funcionario' , G.Unome as 'Gerente' FROM FUNCIONARIO as F LEFT JOIN FUNCIONARIO as G ON G.CPF = F.Cpf_supervisor;
+
+#RIGHT JOIN -> SÓ MUDA OS LADOS
+SELECT F.Unome as 'Funcionario' , G.Unome as 'Gerente' FROM FUNCIONARIO as F RIGHT JOIN FUNCIONARIO as G ON G.CPF = F.Cpf_supervisor;
+
+#CROSS JOIN (Forma errada de usar)
+SELECT * FROM FUNCIONARIO CROSS JOIN DEPENDENTE;
+
+
