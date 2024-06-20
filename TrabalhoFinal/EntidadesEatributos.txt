@@ -1,0 +1,122 @@
+1) 
+	Aluno
+nome
+dataNasc
+altura
+peso
+peso meta
+
+	Ficha de Treino
+data inicial
+data final
+Duração do planejameno
+objetivo
+observações
+
+	Condicionamento
+Aquecimento
+Pausa entre as séries
+Frequencia de treinos
+Bicicleta (tempo, velocidade)
+Esteira (tempo, velocidade)
+Outros (tempo, velocidade)
+
+	Frequencia
+Dia
+Semana
+Foi
+
+	Exercicio
+Peitoral
+Dorsal
+Triceps
+Ombro
+Biceps
+Abdomen
+Membros Inferiores
+
+
+
+	Peitoral (cada atributo multivalorado de série, repetição e ordem)
+Cross-Over
+Crucifixo
+Flexao de braço
+Pec-deck
+Pull Over
+Supino Reto
+Supino Inclinado
+Supino Declinado
+Supino Vertical
+Supino articulado inclinado
+Fly
+
+	Triceps
+Pulley
+Pulley Uni
+Pulley Corda
+Pulley Sup
+Coice
+Frances
+Testa
+Triceps Banco
+
+	Ombro
+Cruc inverso
+Des barra
+Elev lateral
+Elev barra sup
+Elev frontal
+Remada Alta
+Encolhimento
+Arnold
+
+	Dorsal
+Barra Fixa
+Pulley Frente
+Pulldown
+Remada Sentada
+Remada Pulley
+Remada Unilateral
+Remada cavalinho
+Remada Curvada
+Pulley Triangulo
+
+	Biceps
+Rosca Direta
+Rosca Scott
+Rosca Alternada
+Rosca Concentrada
+Martelo
+Polia Cross
+
+	Abdomen
+Curto
+Canivete
+Canga
+Rodinha
+Elev de pernas
+Prancha
+Prancha Lateral
+Remador
+
+	Membros Inferiores
+Agachamento
+Avanço
+Leg Press
+Passada
+Abdução
+Adução
+Afundo
+Elevação Pélvica
+Extensora
+Flexora Deitada
+Flexora Sentada
+Hack
+Levantamento Terra
+Leg Press
+Stiff
+
+
+
+
+
