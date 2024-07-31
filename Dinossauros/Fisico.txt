@@ -1,0 +1,54 @@
+/* Lógico_1: */
+CREATE DATABASE DINO;
+USE DINO;
+
+CREATE TABLE Dinossauros (
+    Id INTEGER PRIMARY KEY auto_increment,
+    nome VARCHAR(50),
+    fk_Caracteristicas_Id INTEGER
+);
+
+CREATE TABLE Caracteristicas (
+    id INTEGER PRIMARY KEY auto_increment,
+    toneladas INTEGER,
+    ano_descoberta INTEGER,
+    descobridor VARCHAR(255),
+    inicio INTEGER,
+    fim INTEGER,
+    pais VARCHAR(40)
+);
+
+CREATE TABLE Era (
+    Id INTEGER PRIMARY KEY auto_increment,
+    nome VARCHAR(50),
+    fk_Caracteristicas_Id INTEGER
+);
+
+CREATE TABLE Grupo (
+    Id INTEGER PRIMARY KEY auto_increment,
+    nome VARCHAR(50),
+    fk_Caracteristicas_Id INTEGER
+);
+ 
+ALTER TABLE Dinossauros ADD CONSTRAINT FK_Dinossauros_2
+    FOREIGN KEY (fk_Caracteristicas_Id)
+    REFERENCES Caracteristicas (Id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Era ADD CONSTRAINT FK_Era_2
+    FOREIGN KEY (fk_Caracteristicas_Id)
+    REFERENCES Caracteristicas (Id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Grupo ADD CONSTRAINT FK_Grupo_2
+    FOREIGN KEY (fk_Caracteristicas_Id)
+    REFERENCES Caracteristicas (Id)
+    ON DELETE RESTRICT;
+    
+TRUNCATE Dinossauros;
+
+INSERT INTO Caracteristicas (toneladas, ano_descoberta, descobridor, inicio, fim, pais) VALUES (4, 1977, 'Maryanska', 145, 66, 'Mongólia');
+SELECT * FROM Caracteristicas;
+
+INSERT INTO Dinossauros (Nome) VALUES ('Saichania'), ('Triceratops'), ('Kentrossauro'), ('Pinacossauro'), ('Alossauro'), ('Torossauro'), ('Anquilossauro');
+SELECT * FROM Dinossauros;
