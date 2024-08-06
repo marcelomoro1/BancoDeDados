@@ -48,7 +48,57 @@ ALTER TABLE Grupo ADD CONSTRAINT FK_Grupo_2
 TRUNCATE Dinossauros;
 
 INSERT INTO Caracteristicas (toneladas, ano_descoberta, descobridor, inicio, fim, pais) VALUES (4, 1977, 'Maryanska', 145, 66, 'Mongólia');
+INSERT INTO Caracteristicas (toneladas, ano_descoberta, descobridor, inicio, fim, pais) VALUES (6, 1887, 'John Bell Hatcher', 145, 66, 'Canadá');
+INSERT INTO Caracteristicas (toneladas, ano_descoberta, descobridor, inicio, fim, pais) VALUES (2, 1909, 'Cientistas Alemães', 201, 145, 'Tanzânia');
+INSERT INTO Caracteristicas (toneladas, ano_descoberta, descobridor, inicio, fim, pais) VALUES (6, 1999, 'Museu Americano De História Natural', 85, 75, 'Tanzânia');
+INSERT INTO Caracteristicas (toneladas, ano_descoberta, descobridor, inicio, fim, pais) VALUES (3, 1877, 'Othiel Charles Marsh', 201, 145, 'América do Norte');
+INSERT INTO Caracteristicas (toneladas, ano_descoberta, descobridor, inicio, fim, pais) VALUES (8, 1891, 'John Bell Hatcher', 145, 66, 'USA');
+INSERT INTO Caracteristicas (toneladas, ano_descoberta, descobridor, inicio, fim, pais) VALUES (8, 1906, 'Barnum Brown', 145, 66, 'América do Norte');
 SELECT * FROM Caracteristicas;
 
-INSERT INTO Dinossauros (Nome) VALUES ('Saichania'), ('Triceratops'), ('Kentrossauro'), ('Pinacossauro'), ('Alossauro'), ('Torossauro'), ('Anquilossauro');
+INSERT INTO Dinossauros (Nome, fk_Caracteristicas_Id) VALUES ('Saichania', 1);
+INSERT INTO Dinossauros (Nome, fk_Caracteristicas_Id) VALUES ('Triceraptos', 2);
+INSERT INTO Dinossauros (Nome, fk_Caracteristicas_Id) VALUES ('Kentossauro', 3);
+INSERT INTO Dinossauros (Nome, fk_Caracteristicas_Id) VALUES ('Pinacossauro', 4);
+INSERT INTO Dinossauros (Nome, fk_Caracteristicas_Id) VALUES ('Alossauro', 5);
+INSERT INTO Dinossauros (Nome, fk_Caracteristicas_Id) VALUES ('Torossauro', 6);
+INSERT INTO Dinossauros (Nome, fk_Caracteristicas_Id) VALUES ('Anquilossauro', 7);
 SELECT * FROM Dinossauros;
+
+INSERT INTO Grupo (Nome, fk_Caracteristicas_Id) VALUES ('Anquilossauros', 1);
+INSERT INTO Grupo (Nome, fk_Caracteristicas_Id) VALUES ('Ceratopsídeos', 2);
+INSERT INTO Grupo (Nome, fk_Caracteristicas_Id) VALUES ('Estegossauros', 3);
+INSERT INTO Grupo (Nome, fk_Caracteristicas_Id) VALUES ('Anquilossauros', 4);
+INSERT INTO Grupo (Nome, fk_Caracteristicas_Id) VALUES ('Terápodes', 5);
+INSERT INTO Grupo (Nome, fk_Caracteristicas_Id) VALUES ('Ceratopsídeos', 6);
+INSERT INTO Grupo (Nome, fk_Caracteristicas_Id) VALUES ('Anquilossauros', 7);
+SELECT * FROM Grupo;
+
+INSERT INTO Era (Nome, fk_Caracteristicas_Id) VALUES ('Cretáceo', 1);
+INSERT INTO Era (Nome, fk_Caracteristicas_Id) VALUES ('Cretáceo', 2);
+INSERT INTO Era (Nome, fk_Caracteristicas_Id) VALUES ('Jurássico', 3);
+INSERT INTO Era (Nome, fk_Caracteristicas_Id) VALUES ('Cretáceo', 4);
+INSERT INTO Era (Nome, fk_Caracteristicas_Id) VALUES ('Jurássico', 5);
+INSERT INTO Era (Nome, fk_Caracteristicas_Id) VALUES ('Cretáceo', 6);
+INSERT INTO Era (Nome, fk_Caracteristicas_Id) VALUES ('Cretáceo', 7);
+SELECT * FROM Era;
+
+SELECT D.nome as 'Dinossauro', G.nome as 'Grupo', C.ano_descoberta as 'Ano', C.descobridor, E.nome as 'Era', C.inicio, C.fim, C.pais as 'país'
+FROM Dinossauros as D, Grupo as G, Caracteristicas as C, Era as E
+WHERE D.fk_Caracteristicas_Id = C.id AND G.fk_Caracteristicas_Id = C.id AND E.fk_Caracteristicas_Id = C.id 
+ORDER BY D.nome;
+
+SELECT D.nome as 'Dinossauro', G.nome as 'Grupo', C.ano_descoberta as 'Ano', C.descobridor, E.nome as 'Era', C.inicio, C.fim, C.pais as 'país'
+FROM Dinossauros as D, Grupo as G, Caracteristicas as C, Era as E
+WHERE D.fk_Caracteristicas_Id = C.id AND G.fk_Caracteristicas_Id = C.id AND E.fk_Caracteristicas_Id = C.id 
+ORDER BY C.descobridor;
+
+SELECT D.nome as 'Dinossauro', G.nome as 'Grupo', C.ano_descoberta as 'Ano', C.descobridor, E.nome as 'Era', C.inicio, C.fim, C.pais as 'país'
+FROM Dinossauros as D, Grupo as G, Caracteristicas as C, Era as E
+WHERE D.fk_Caracteristicas_Id = C.id AND G.fk_Caracteristicas_Id = C.id AND E.fk_Caracteristicas_Id = C.id AND G.nome = 'Anquilossauros'
+ORDER BY C.ano_descoberta;
+
+SELECT D.nome as 'Dinossauro', G.nome as 'Grupo', C.ano_descoberta as 'Ano', C.descobridor, E.nome as 'Era', C.inicio, C.fim, C.pais as 'país'
+FROM Dinossauros as D, Grupo as G, Caracteristicas as C, Era as E
+WHERE D.fk_Caracteristicas_Id = C.id AND G.fk_Caracteristicas_Id = C.id AND E.fk_Caracteristicas_Id = C.id AND G.nome = 'Anquilossauros'
+ORDER BY C.ano_descoberta
