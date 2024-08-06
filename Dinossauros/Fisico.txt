@@ -102,3 +102,7 @@ SELECT D.nome as 'Dinossauro', G.nome as 'Grupo', C.ano_descoberta as 'Ano', C.d
 FROM Dinossauros as D, Grupo as G, Caracteristicas as C, Era as E
 WHERE D.fk_Caracteristicas_Id = C.id AND G.fk_Caracteristicas_Id = C.id AND E.fk_Caracteristicas_Id = C.id AND G.nome = 'Anquilossauros'
 ORDER BY C.ano_descoberta
+
+SELECT D.nome as 'Dinossauro', G.nome as 'Grupo', C.ano_descoberta as 'Ano', C.descobridor, E.nome as 'Era', C.inicio, C.fim, C.pais as 'país'
+FROM Dinossauros as D, Grupo as G, Caracteristicas as C, Era as E
+WHERE D.fk_Caracteristicas_Id = C.id AND G.fk_Caracteristicas_Id = C.id AND E.fk_Caracteristicas_Id = C.id AND G.nome = 'Anquilossauros' OR 'Ceratopsídeos' AND C.ano_descoberta BETWEEN 1900 AND 1999;
