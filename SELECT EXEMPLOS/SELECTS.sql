@@ -38,3 +38,56 @@ WHERE Cpf_supervisor IS NULL; --funcionarios que não possuem supervisor
 SELECT TOP 3 *
 FROM FUNCIONARIO
 ORDER BY SALARIO DESC; --selecione os top 3 salarios da empresa
+
+--Funcao min (com select aninhado e variável)
+SELECT MIN(Salario)
+FROM FUNCIONARIO; --seleciona o salario minimo dos funcionarios
+
+SELECT * 
+FROM FUNCIONARIO
+WHERE SALARIO = (SELECT MIN(Salario)
+FROM FUNCIONARIO); --Seleciona todas informações dos funcionarios que tem o salário minimo
+
+--Outra forma de realizar o mesmo exemplo com a variável
+DECLARE @Salario_Min DECIMAL(10,2); --Crio uma variavel salario minimo
+SET @Salario_Min = (SELECT MIN(Salario) FROM FUNCIONARIO); --Atribuo o valor na variável
+
+SELECT * 
+FROM FUNCIONARIO
+WHERE SALARIO = @Salario_Min; --Seleciona todas informações dos funcionarios que tem o salário minimo
+
+--Funcao Max (com select aninhado e variável)
+SELECT * 
+FROM FUNCIONARIO
+WHERE SALARIO = (SELECT MAX(Salario)
+FROM FUNCIONARIO);
+
+--Outra forma de realizar o mesmo exemplo com a variável
+DECLARE @Salario_Max DECIMAL(10,2); --Crio uma variavel salario maximo
+SET @Salario_Max = (SELECT MAX(Salario) FROM FUNCIONARIO); --Atribuo o valor na variável
+
+SELECT * 
+FROM FUNCIONARIO
+WHERE SALARIO = @Salario_Max; --Seleciona todas informações dos funcionarios que tem o salário maximo
+
+--Count
+SELECT COUNT(Cpf)
+FROM FUNCIONARIO;
+
+--Media
+SELECT AVG(Salario)
+FROM FUNCIONARIO; -- media salarial dos funcionarios
+
+SELECT Salario
+FROM FUNCIONARIO
+WHERE Cpf_supervisor IS NULL; --Quanto o jorge ganha
+
+--Seleciona o salario do jorge (chefe) menos a media salarial da empresa pra ver a diferença salarial (Forma não tão correta)
+SELECT (SELECT Salario FROM FUNCIONARIO WHERE Cpf_supervisor IS NULL) - (SELECT AVG(Salario) FROM FUNCIONARIO); 
+
+--Forma correta do exercicio acima
+DECLARE @Salario_Media DECIMAL(10,2); 
+SET @Salario_Media = (SELECT AVG(Salario) FROM FUNCIONARIO); --Declaro a media salarial
+DECLARE @Salario_Maximo DECIMAL(10,2); 
+SET @Salario_Maximo = (SELECT MAX(Salario) FROM FUNCIONARIO); --Declaro o salario maximo
+SELECT(@Salario_Maximo - @Salario_Media); --Realizo a conta
