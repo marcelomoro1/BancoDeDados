@@ -1,0 +1,20 @@
+Foi utilizado o banco de dados EMPRESA das aulas
+
+--DISTINCT
+SELECT DISTINCT SALARIO 
+FROM FUNCIONARIO ;
+
+--WHERE
+SELECT * 
+FROM FUNCIONARIO 
+WHERE PNome = 'João';
+
+--AND
+SELECT Pnome, Salario
+FROM Funcionario
+WHERE Salario >= 30000 AND Sexo = 'M';
+
+--OR
+SELECT Pnome
+FROM FUNCIONARIO
+WHERE ENDERECO LIKE '%São Paulo%' OR ENDERECO LIKE '%Curitiba%';
