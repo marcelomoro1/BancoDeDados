@@ -91,3 +91,26 @@ SET @Salario_Media = (SELECT AVG(Salario) FROM FUNCIONARIO); --Declaro a media s
 DECLARE @Salario_Maximo DECIMAL(10,2); 
 SET @Salario_Maximo = (SELECT MAX(Salario) FROM FUNCIONARIO); --Declaro o salario maximo
 SELECT(@Salario_Maximo - @Salario_Media); --Realizo a conta
+
+--LIKE
+SELECT *
+FROM FUNCIONARIO
+WHERE Datanasc LIKE '__72%';
+
+--IN
+SELECT *
+FROM FUNCIONARIO
+WHERE SALARIO IN (25000,30000); --Seleciona todos valores entre 25000 e 30000
+
+--SELECT
+SELECT Horas, Pnr 
+FROM TRABALHA_EM
+WHERE Fcpf = '33344555587'; --fernando
+
+SELECT DISTINCT F.Pnome,T1.Fcpf
+FROM TRABALHA_EM AS T1, TRABALHA_EM AS T2, FUNCIONARIO AS F
+WHERE T1.Pnr = T2.Pnr 
+AND F.Cpf = T1.Fcpf
+AND T1.Horas = T2.Horas
+AND T2.Fcpf = '33344555587'
+AND T1.Fcpf <> '33344555587'; -- Seleciona as pessoas que trabalham no mesmo projeto do fernando e no mesmo numero de horas 
