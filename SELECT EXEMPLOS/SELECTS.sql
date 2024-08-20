@@ -114,3 +114,9 @@ AND F.Cpf = T1.Fcpf
 AND T1.Horas = T2.Horas
 AND T2.Fcpf = '33344555587'
 AND T1.Fcpf <> '33344555587'; -- Seleciona as pessoas que trabalham no mesmo projeto do fernando e no mesmo numero de horas 
+
+--BETWEEN
+SELECT F.Pnome 
+FROM Funcionario as F
+WHERE F.Dnr = 5 
+AND F.Salario BETWEEN 30000 AND 40000; --Seleciona os funcionarios do departamento 5 que recebem entre 30 a 40k
