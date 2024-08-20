@@ -137,3 +137,29 @@ SELECT F.*, D.*
 FROM FUNCIONARIO AS F
 INNER JOIN DEPARTAMENTO AS D
 ON F.Dnr = D.Dnumero --Seleciona funcionarios que fazem parte de algum departamento vinculado
+
+--INNER JOIN COM WHERE
+SELECT F.Pnome, F.Unome, F.Endereco
+FROM FUNCIONARIO AS F
+INNER JOIN DEPARTAMENTO AS D
+ON F.Dnr = D.Dnumero
+WHERE D.Dnome = 'Pesquisa'; --Seleciona os funcionarios que trabalham no departamento Pesquisa
+
+--INNER JOIN COM 3 TABELAS
+SELECT F.Pnome, F.Unome
+FROM FUNCIONARIO AS F
+INNER JOIN TRABALHA_EM AS TE
+ON TE.Fcpf = F.Cpf  --Ponto de conexão da tabela TRABALHA_EM com a tabela FUNCIONARIO
+INNER JOIN PROJETO AS P
+ON TE.Pnr = P.Projnumero --Ponto de conexão da tabela TRABALHA_EM com a tabela PROJETO
+WHERE P.Projnome = 'ProdutoX'; --Seleciona os funcionarios que trabalham no Produto X
+
+--INNER JOIN COM 3 TABELAS
+SELECT P.Projnumero, D.Dnumero, F.Unome, F.Endereco, F.Datanasc
+FROM FUNCIONARIO AS F
+INNER JOIN DEPARTAMENTO AS D
+ON D.Cpf_gerente = F.Cpf
+INNER JOIN PROJETO AS P
+ON D.Dnumero = P.Dnum
+WHERE P.Projlocal = 'Mauá'; --Seleciona o gerente que coordena os projetos que estão situados em Mauá
+
