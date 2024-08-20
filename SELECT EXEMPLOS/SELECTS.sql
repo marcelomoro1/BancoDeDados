@@ -126,3 +126,8 @@ SELECT F.Pnome as 'Nome', F.Unome as 'Sobrenome'
 FROM Funcionario as F, Departamento as D
 WHERE F.Dnr = D.Dnumero
 AND D.Dnome='Pesquisa'; --Selecionar o nome e sobrenome dos funcionarios que trabalham no departamento Pesquisa
+
+--CONCAT e AUTORELACIONAMENTO
+SELECT CONCAT(F1.Pnome, ' ',F1.Unome) as 'Nome Completo', F2.Pnome as 'Supervisor'
+FROM FUNCIONARIO AS F1, FUNCIONARIO AS F2
+WHERE F2.Cpf = F1.Cpf_supervisor; --Seleciona todos funcionarios e seus respectivos gerentes
