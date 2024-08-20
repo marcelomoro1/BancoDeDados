@@ -120,3 +120,9 @@ SELECT F.Pnome
 FROM Funcionario as F
 WHERE F.Dnr = 5 
 AND F.Salario BETWEEN 30000 AND 40000; --Seleciona os funcionarios do departamento 5 que recebem entre 30 a 40k
+
+--ALIASES
+SELECT F.Pnome as 'Nome', F.Unome as 'Sobrenome' 
+FROM Funcionario as F, Departamento as D
+WHERE F.Dnr = D.Dnumero
+AND D.Dnome='Pesquisa'; --Selecionar o nome e sobrenome dos funcionarios que trabalham no departamento Pesquisa
