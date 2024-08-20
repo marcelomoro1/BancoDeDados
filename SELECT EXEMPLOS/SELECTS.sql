@@ -19,7 +19,7 @@ SELECT Pnome
 FROM FUNCIONARIO
 WHERE ENDERECO LIKE '%São Paulo%' OR ENDERECO LIKE '%Curitiba%'; --selecionar funcionarios que moram ou em são paulo ou em curitiba
 
---OR
+--NOT
 SELECT Pnome
 FROM FUNCIONARIO
 WHERE NOT ENDERECO LIKE '%São Paulo%'; --selecionar funcionarios que não mora em são paulo
@@ -70,11 +70,11 @@ SELECT *
 FROM FUNCIONARIO
 WHERE SALARIO = @Salario_Max; --Seleciona todas informações dos funcionarios que tem o salário maximo
 
---Count
+--COUNT
 SELECT COUNT(Cpf)
-FROM FUNCIONARIO;
+FROM FUNCIONARIO; --Quantidade de funcionarios existentes
 
---Media
+--MEDIA
 SELECT AVG(Salario)
 FROM FUNCIONARIO; -- media salarial dos funcionarios
 
@@ -131,3 +131,9 @@ AND D.Dnome='Pesquisa'; --Selecionar o nome e sobrenome dos funcionarios que tra
 SELECT CONCAT(F1.Pnome, ' ',F1.Unome) as 'Nome Completo', F2.Pnome as 'Supervisor'
 FROM FUNCIONARIO AS F1, FUNCIONARIO AS F2
 WHERE F2.Cpf = F1.Cpf_supervisor; --Seleciona todos funcionarios e seus respectivos gerentes
+
+--INNER JOIN 
+SELECT F.*, D.*
+FROM FUNCIONARIO AS F
+INNER JOIN DEPARTAMENTO AS D
+ON F.Dnr = D.Dnumero --Seleciona funcionarios que fazem parte de algum departamento vinculado
