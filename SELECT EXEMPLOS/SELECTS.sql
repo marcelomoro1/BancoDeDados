@@ -223,3 +223,36 @@ FROM TRABALHA_EM AS TE
 JOIN PROJETO AS P
 ON P.Projnumero = TE.Pnr
 GROUP BY P.Projnome; --Seleciona a media de horas trabalhadas por projeto, o group by tem que ser sempre por um dos campos utilizados no select, se der erro tenta com outro
+
+--GROUP BY simples
+SELECT COUNT(F.Cpf) as 'Qtd funcionarios', F.Sexo as 'Sexo'
+FROM FUNCIONARIO AS F
+GROUP BY F.Sexo --Seleciona quantas funcionarios tem por sexo
+
+--GROUP BY
+SELECT COUNT(*) as 'Numero de Projetos', P.Projlocal as 'Local' 
+FROM PROJETO AS P
+GROUP BY P.Projlocal --Seleciona o numero de projetos em cada local
+
+--HAVING 
+SELECT D.Dnome as 'Departamento', COUNT(F.cpf) as 'Quantidade'
+FROM FUNCIONARIO AS F
+JOIN DEPARTAMENTO AS D
+ON F.Dnr = D.Dnumero
+GROUP BY D.Dnome
+HAVING COUNT(F.Cpf)>3
+ORDER BY D.Dnome ; --Seleciona departamentos com mais de 3 funcionarios
+
+--HAVING com SUM
+SELECT P.Projnome as 'Projeto', SUM(TE.Horas) as 'Horas'
+FROM PROJETO AS P
+JOIN TRABALHA_EM AS TE
+ON TE.Pnr = P.Projnumero
+GROUP BY P.Projnome
+HAVING SUM(TE.Horas) > 50
+ORDER BY P.Projnome; --Seleciona os projetos que tem mais de 50 horas trabalhadas
+
+--EXISTS
+SELECT F.*
+FROM FUNCIONARIO AS F
+WHERE EXISTS (SELECT 1 FROM DEPARTAMENTO AS D WHERE D.Cpf_gerente = F.Cpf ) --Seleciona os funcionarios que são gerente em algum departamento
