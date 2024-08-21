@@ -163,3 +163,42 @@ INNER JOIN PROJETO AS P
 ON D.Dnumero = P.Dnum
 WHERE P.Projlocal = 'Mauá'; --Seleciona o gerente que coordena os projetos que estão situados em Mauá
 
+--LEFT JOIN 
+SELECT F.*, D.*
+FROM FUNCIONARIO AS F
+LEFT JOIN DEPARTAMENTO AS D
+ON F.Dnr = D.Dnumero --Funcionario fica a esquerda pq queremos o funcionarios com departamento
+ORDER BY F.Pnome ASC; -- Seleciona os funcionarios com e sem departamento
+
+--LEFT JOIN 
+SELECT *
+FROM FUNCIONARIO AS F
+LEFT JOIN DEPARTAMENTO AS D
+ON F.Dnr = D.Dnumero 
+WHERE F.Dnr IS NULL; --Seleciona apenas os funcionarios que NÃO possuem departamento
+
+--NOT EXISTS
+SELECT *
+FROM DEPARTAMENTO AS D
+WHERE NOT EXISTS (SELECT 1 FROM FUNCIONARIO AS F WHERE F.Dnr = D.Dnumero); --Seleciona todos departamento que não existem funcionarios, o 1 serve para dizer que departamentos que possuem mais de 1 funcionario serão excluidos
+
+--UNION
+SELECT D.Dnome
+FROM DEPARTAMENTO AS D
+UNION
+SELECT P.Projnome
+FROM PROJETO AS P -- Junta dois selects em um só, esse seleciona o nome de todos departamentos e o nome de todos projetos
+
+--INTERSECT
+SELECT Cpf
+FROM FUNCIONARIO
+INTERSECT
+SELECT Cpf_gerente
+FROM DEPARTAMENTO; --Intersect pega apenas o que tem de igual nas duas tabelas e mostra, no caso esse seleciona os funcionarios que SÃO gerentes em departamentos
+
+--EXCEPT
+SELECT Cpf
+FROM FUNCIONARIO
+EXCEPT
+SELECT Cpf_gerente
+FROM DEPARTAMENTO; --Except pega apenas o que tem de DIFERENTE nas duas tabelas e mostra, no caso esse seleciona os funcionarios que não são gerentes em departamentos
