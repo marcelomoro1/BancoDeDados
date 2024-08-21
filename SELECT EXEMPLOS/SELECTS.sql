@@ -202,3 +202,24 @@ FROM FUNCIONARIO
 EXCEPT
 SELECT Cpf_gerente
 FROM DEPARTAMENTO; --Except pega apenas o que tem de DIFERENTE nas duas tabelas e mostra, no caso esse seleciona os funcionarios que não são gerentes em departamentos
+
+--GROUP BY com COUNT
+SELECT D.Dnome as 'Nome Departamento', COUNT(F.Cpf) as 'N_Funcionarios'
+FROM FUNCIONARIO AS F
+JOIN DEPARTAMENTO AS D
+ON F.Dnr = D.Dnumero
+GROUP BY D.Dnome --Seleciona quantas pessoas tem em cada departamento
+
+--GROUP BY com SUM
+SELECT D.Dnome as 'Nome Departamento', SUM(F.Salario) as 'Salario Total'
+FROM FUNCIONARIO AS F
+JOIN DEPARTAMENTO AS D
+ON F.Dnr = D.Dnumero
+GROUP BY D.Dnome --Seleciona os departamentos e a soma de salario dos funcionarios em cada departamento
+
+--GROUP BY com AVG
+SELECT P.Projnome as 'Nome do Projeto', AVG(TE.Horas) as 'Horas totais'
+FROM TRABALHA_EM AS TE
+JOIN PROJETO AS P
+ON P.Projnumero = TE.Pnr
+GROUP BY P.Projnome; --Seleciona a media de horas trabalhadas por projeto, o group by tem que ser sempre por um dos campos utilizados no select, se der erro tenta com outro
