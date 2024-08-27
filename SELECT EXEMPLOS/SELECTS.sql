@@ -256,3 +256,13 @@ ORDER BY P.Projnome; --Seleciona os projetos que tem mais de 50 horas trabalhada
 SELECT F.*
 FROM FUNCIONARIO AS F
 WHERE EXISTS (SELECT 1 FROM DEPARTAMENTO AS D WHERE D.Cpf_gerente = F.Cpf ) --Seleciona os funcionarios que são gerente em algum departamento
+
+-- CAST
+SELECT 'O funcionario ' + F.pnome + ' Tem um salario de ' + CAST(F.Salario as VARCHAR(30)) 
+FROM FUNCIONARIO AS F
+WHERE F.Pnome = 'Jennifer';
+
+-- CONVERT
+SELECT 'O funcionario ' + F.pnome + ' Tem um salario de ' + CONVERT(VARCHAR(30), F.Salario) 
+FROM FUNCIONARIO AS F
+WHERE F.Pnome = 'Jennifer';
