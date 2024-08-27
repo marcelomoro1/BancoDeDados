@@ -53,3 +53,4 @@ INSERT INTO @ALUNO
 VALUES ('Juca da silva', '1999-10-10', 'SI');
 SELECT * FROM @ALUNO;
 
+
