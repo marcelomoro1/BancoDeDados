@@ -17,5 +17,5 @@ SELECT @nome as 'Nome Completo',
 	   @dinheiro as 'Dinheiro';
 
 PRINT 'O meu nome é: ' + @nome 
-					   +' e eu nasci em: ' + CAST(@data_nasc as VARCHAR(15)) 
-					   + ' Minha idade eh: '+ CAST(YEAR(GETDATE())-YEAR(@data_nasc) as VARCHAR(4));
+		       +' e eu nasci em: ' + CAST(@data_nasc as VARCHAR(15)) 
+		       + ' Minha idade eh: '+ CAST(YEAR(GETDATE())-YEAR(@data_nasc) as VARCHAR(4));
