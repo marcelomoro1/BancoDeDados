@@ -266,3 +266,8 @@ WHERE F.Pnome = 'Jennifer';
 SELECT 'O funcionario ' + F.pnome + ' Tem um salario de ' + CONVERT(VARCHAR(30), F.Salario) 
 FROM FUNCIONARIO AS F
 WHERE F.Pnome = 'Jennifer';
+
+-- CONVERTENDO DATA AMERICANA PARA BRASILEIRA
+SELECT CONVERT(VARCHAR(30), FUNCIONARIO.Datanasc, 103)
+FROM FUNCIONARIO
+WHERE FUNCIONARIO.Pnome = 'Jennifer';
