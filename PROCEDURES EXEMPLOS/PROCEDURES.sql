@@ -75,3 +75,19 @@ BEGIN
 END
 EXEC atualiza_salario @Cpf = '33344555587', @Novo_Salario = 25000.00;
 SELECT * FROM FUNCIONARIO WHERE FUNCIONARIO.Cpf = '33344555587';
+
+
+CREATE PROCEDURE sp_Inserir_Funcionario
+	@Pnome VARCHAR(15),
+    @Minicial CHAR(1),
+    @Unome VARCHAR(15),
+    @Cpf CHAR(11)
+AS
+BEGIN
+	INSERT INTO FUNCIONARIO (Pnome, Minicial, Unome, Cpf) VALUES (@Pnome, @Minicial, @Unome, @Cpf);
+END
+DROP PROCEDURE sp_Inserir_Funcionario
+EXEC sp_Inserir_Funcionario @Pnome = 'Juca', @Minicial = 'm', @Unome = 'brabo', @Cpf = '12345678911'; --inserindo um funcionario na tabela
+
+
+
