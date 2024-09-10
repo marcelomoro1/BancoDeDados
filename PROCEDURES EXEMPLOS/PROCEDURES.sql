@@ -23,3 +23,17 @@ BEGIN
 	SELECT *
 	FROM FUNCIONARIO
 END --cria um procedure que não consegue ser visualizado pelo sp_helptext por conta do encryption
+
+
+ALTER PROCEDURE info -- alter procedure para mudar a informação de uma procedure já criada
+@Nome_departamento VARCHAR(50)
+AS
+BEGIN
+	SELECT CONCAT(F.Pnome, ' ',F.Unome) as 'Nome Completo',D.Dnome 
+	FROM FUNCIONARIO AS F
+	INNER JOIN DEPARTAMENTO AS D
+	ON F.Dnr = D.Dnumero
+	WHERE D.Dnome = @Nome_departamento
+
+END
+EXEC info @Nome_departamento = 'Pesquisa' --exibe todos os funcionarios e de um departamento especifico
