@@ -58,3 +58,20 @@ BEGIN
 END
 EXEC atualiza_salario @Cpf = '33344555587', @Novo_Salario = 25000.00; -- Atualiza o salario de alguem com o cpf especifico e caso o cpf não exista de uma mensagem
 SELECT * FROM FUNCIONARIO WHERE FUNCIONARIO.Cpf = '33344555587';
+
+
+ALTER PROCEDURE atualiza_salario --outra forma mais facil de realizar o exercicio acima, utlizando rowcount
+@Cpf CHAR(11),
+@Novo_Salario DECIMAL(10,2)
+AS
+BEGIN
+	UPDATE FUNCIONARIO
+	SET Salario = @Novo_Salario
+	WHERE Cpf = @Cpf;
+
+	IF @@ROWCOUNT= 0 --caso nenhuma linha tenha sido alterada (nenhum cpf foi modificado, faça mostre que nao deu certo)
+		PRINT 'Nao existe alguem com esse cpf'
+
+END
+EXEC atualiza_salario @Cpf = '33344555587', @Novo_Salario = 25000.00;
+SELECT * FROM FUNCIONARIO WHERE FUNCIONARIO.Cpf = '33344555587';
