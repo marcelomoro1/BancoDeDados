@@ -78,7 +78,7 @@ SELECT * FROM FUNCIONARIO WHERE FUNCIONARIO.Cpf = '33344555587';
 
 
 CREATE PROCEDURE sp_Inserir_Funcionario
-	@Pnome VARCHAR(15),
+    @Pnome VARCHAR(15),
     @Minicial CHAR(1),
     @Unome VARCHAR(15),
     @Cpf CHAR(11)
