@@ -15,3 +15,11 @@ BEGIN
 	ON F.Dnr = D.Dnumero
 END
 EXEC listar_funcionarios_por_departamento --exibe todos os funcionarios e seus respectivos departamentos
+
+CREATE PROCEDURE sp_Funcionario
+WITH ENCRYPTION
+AS
+BEGIN
+	SELECT *
+	FROM FUNCIONARIO
+END --cria um procedure que não consegue ser visualizado pelo sp_helptext por conta do encryption
