@@ -6,7 +6,7 @@ BEGIN
 END
 EXEC ExibirNome @Nome = 'Marcelo'; --exibe o nome Marcelo
 
-CREATE PROCEDURE info_funcionarios
+CREATE PROCEDURE listar_funcionarios_por_departamento
 AS
 BEGIN
 	SELECT F.Pnome, F.Unome, D.Dnome
@@ -14,4 +14,4 @@ BEGIN
 	INNER JOIN DEPARTAMENTO AS D
 	ON F.Dnr = D.Dnumero
 END
-EXEC info_funcionarios --exibe todos os funcionarios e seus respectivos departamentos
+EXEC listar_funcionarios_por_departamento --exibe todos os funcionarios e seus respectivos departamentos
