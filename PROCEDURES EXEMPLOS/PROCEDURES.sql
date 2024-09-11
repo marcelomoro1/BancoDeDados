@@ -90,4 +90,25 @@ DROP PROCEDURE sp_Inserir_Funcionario
 EXEC sp_Inserir_Funcionario @Pnome = 'Juca', @Minicial = 'm', @Unome = 'brabo', @Cpf = '12345678911'; --inserindo um funcionario na tabela
 
 
+CREATE PROCEDURE sp_funcionario_departamento
+	@Pnome VARCHAR(15),
+    @Minicial CHAR(1),
+    @Unome VARCHAR(15),
+    @Cpf CHAR(11),
+	@Dnumero INT,
+	@Dnome VARCHAR(15)
+AS
+BEGIN
+	--insere um novo departamento
+	INSERT INTO DEPARTAMENTO (Dnumero, Dnome) VALUES (@Dnumero, @Dnome);
+	--insere um novo funcionario desse mesmo departamento
+	INSERT INTO FUNCIONARIO (Pnome, Minicial, Unome, Cpf, Dnr) VALUES (@Pnome, @Minicial, @Unome, @Cpf, @Dnumero);
 
+	--faz com que esse funcionario seja gerente desse departamento
+	UPDATE DEPARTAMENTO
+	SET Cpf_gerente = @Cpf, Data_inicio_gerente = GETDATE()
+	WHERE Dnumero = @Dnumero;
+END
+
+EXEC sp_funcionario_departamento @Pnome = 'Welington', @Minicial= 'F',@Unome= 'Silva', @Cpf= '98454376543', @Dnumero = 91, @Dnome = 'Engenharia'
+SELECT * FROM DEPARTAMENTO WHERE Dnumero = 91;
