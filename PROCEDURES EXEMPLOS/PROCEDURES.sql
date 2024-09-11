@@ -137,3 +137,28 @@ BEGIN
 END
 DROP PROCEDURE sp_add_funcionario
 EXEC sp_add_funcionario @Pnome = 'mito', @Minicial = 'm', @Unome = 'uaas', @Cpf = '12475642389'--Inserir novo funcionario mas antes verificar se existe um funcionario com o mesmo nome completo
+
+
+
+CREATE PROCEDURE exercicio2_adaptado -- se nao digitar nada no nome pega todos funcionarios de todos departamentos
+@Nome_departamento VARCHAR(50) = NULL
+AS
+BEGIN
+	IF @Nome_departamento is null
+	BEGIN
+		SELECT CONCAT(F.Pnome, ' ',F.Unome) as 'Nome Completo',D.Dnome 
+		FROM FUNCIONARIO AS F
+		INNER JOIN DEPARTAMENTO AS D
+		ON F.Dnr = D.Dnumero
+	END
+
+	ELSE
+	BEGIN
+		SELECT CONCAT(F.Pnome, ' ',F.Unome) as 'Nome Completo',D.Dnome 
+		FROM FUNCIONARIO AS F
+		INNER JOIN DEPARTAMENTO AS D
+		ON F.Dnr = D.Dnumero
+		WHERE D.Dnome = @Nome_departamento
+	END
+END
+EXEC exercicio2_adaptado--exibe todos os funcionarios e de um departamento especifico ou todos os funcionarios de todos departamentos
