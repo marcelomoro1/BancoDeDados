@@ -112,3 +112,28 @@ END
 
 EXEC sp_funcionario_departamento @Pnome = 'Welington', @Minicial= 'F',@Unome= 'Silva', @Cpf= '98454376543', @Dnumero = 91, @Dnome = 'Engenharia'
 SELECT * FROM DEPARTAMENTO WHERE Dnumero = 91;
+
+
+
+CREATE PROCEDURE sp_add_funcionario
+	@Pnome VARCHAR(15),
+    @Minicial CHAR(1),
+    @Unome VARCHAR(15),
+	@Cpf VARCHAR(11)
+
+AS
+BEGIN
+
+	--insere um novo funcionario desse mesmo departamento
+	IF NOT EXISTS(SELECT 1 FROM FUNCIONARIO AS F WHERE F.Pnome = @Pnome AND F.Minicial = @Minicial AND F.Unome = @Unome)
+	BEGIN
+		INSERT INTO FUNCIONARIO (Pnome, Minicial, Unome, Cpf) VALUES (@Pnome, @Minicial, @Unome, @Cpf);
+	END
+	ELSE
+	BEGIN
+		print 'ja existe';
+
+	END
+END
+DROP PROCEDURE sp_add_funcionario
+EXEC sp_add_funcionario @Pnome = 'mito', @Minicial = 'm', @Unome = 'uaas', @Cpf = '12475642389'--Inserir novo funcionario mas antes verificar se existe um funcionario com o mesmo nome completo
