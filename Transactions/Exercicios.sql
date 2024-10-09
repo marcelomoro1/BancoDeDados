@@ -85,3 +85,48 @@ END
 		PRINT 'DEU ERRO NO IF';
 		PRINT ERROR_MESSAGE();
 	END CATCH
+
+------------------------------------
+	CREATE TABLE CONTA(
+	id INT PRIMARY KEY,
+	saldo DECIMAL(10,2) not null,
+	nome varchar(255) not null
+	);
+	INSERT INTO CONTA VALUES (1,1500.25,'jose');
+	INSERT INTO CONTA VALUES (2,4200.25,'sdfaa');
+	INSERT INTO CONTA VALUES (3,8100.25,'ccccccc');
+
+	CREATE PROCEDURE sp_Transferencia
+	@contaOrigem INT,
+	@contaDestino INT,
+	@valorTransferencia DECIMAL(10,2)
+	AS
+	BEGIN
+		BEGIN TRANSACTION;
+
+		--removendo
+		UPDATE CONTA
+		SET saldo = saldo - @valorTransferencia
+		WHERE id = @contaOrigem;
+		SELECT * FROM CONTA;
+
+		--depositando
+		UPDATE CONTA
+		SET saldo = saldo + @valorTransferencia
+		WHERE id = @contaDestino;
+		SELECT * FROM CONTA;
+
+		IF (SELECT saldo FROM CONTA WHERE id = @contaOrigem) <0
+		BEGIN
+			ROLLBACK TRANSACTION
+			PRINT 'DINHEIRO INSUFICIENTE';
+		END
+
+		ELSE
+		BEGIN
+			COMMIT TRANSACTION;
+			PRINT 'TRANSFERENCIA REALIZADA COM SUCESSO';
+		END
+	END
+	EXEC sp_Transferencia @contaOrigem = 1, @contaDestino = 2, @valorTransferencia = 10;
+	SELECT * FROM CONTA
