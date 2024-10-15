@@ -40,10 +40,12 @@ BEGIN
 	DECLARE @Pnome VARCHAR(15),
 			@Unome VARCHAR(15),
 			@CPF CHAR(11);
-	
+
+	--setando os valores das variáveis
 	SELECT @Pnome = I.Pnome, @Unome = I.Unome, @CPF = I.Cpf
 	FROM inserted as I;
-	
+
+	--verificando se existe alguem com o mesmo Pnome e Unome
 	IF EXISTS(SELECT * FROM FUNCIONARIO AS F WHERE @Pnome = F.Pnome AND @Unome = F.Unome)
 		PRINT 'Está inserindo uma pessoa duplicada!';
 	ELSE
