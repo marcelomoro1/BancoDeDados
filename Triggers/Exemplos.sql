@@ -22,3 +22,13 @@ INSERT INTO FUNCIONARIO (Cpf, Pnome, Unome) VALUES ( '12345676543', 'Mffdf', 'df
 
 -----------------------------------------------------------------------------------------
 
+CREATE TRIGGER teste_trigger_instead_of
+ON FUNCIONARIO
+INSTEAD OF INSERT
+AS
+PRINT 'Olá de novo, não inseri os registros dessa vez!';
+
+INSERT INTO FUNCIONARIO (Cpf, Pnome, Unome) VALUES ( '12345676543', 'Mffdf', 'dfhfh');
+
+----------------------------------------------------------------------------------------
+
