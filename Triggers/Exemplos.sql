@@ -32,3 +32,28 @@ INSERT INTO FUNCIONARIO (Cpf, Pnome, Unome) VALUES ( '12345676543', 'Mffdf', 'df
 
 ----------------------------------------------------------------------------------------
 
+CREATE TRIGGER trg_pessoas_duplicadas
+ON FUNCIONARIO
+INSTEAD OF INSERT
+AS
+BEGIN
+	DECLARE @Pnome VARCHAR(15),
+			@Unome VARCHAR(15),
+			@CPF CHAR(11);
+	
+	SELECT @Pnome = I.Pnome, @Unome = I.Unome, @CPF = I.Cpf
+	FROM inserted as I;
+	
+	IF EXISTS(SELECT * FROM FUNCIONARIO AS F WHERE @Pnome = F.Pnome AND @Unome = F.Unome)
+		PRINT 'Está inserindo uma pessoa duplicada!';
+	ELSE
+		BEGIN
+		INSERT INTO FUNCIONARIO (Cpf, Pnome, Unome) VALUES (@CPF, @Pnome, @Unome);
+		PRINT 'PESSOA INSERIDA COM SUCESSO';
+		END
+END
+
+INSERT INTO FUNCIONARIO (Cpf, Pnome, Unome) VALUES ( '18345676545', 'aeeeee', 'dfhfh');
+
+------------------------------------------------------------------------------------------
+
