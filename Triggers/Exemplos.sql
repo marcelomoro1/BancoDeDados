@@ -96,3 +96,36 @@ BEGIN
 END
 INSERT INTO FUNCIONARIO (Cpf, Pnome, Unome) VALUES ( '18343276545', 'afdfde', 'tthhh');
 
+--------------------------------------------------------------------------------------------
+
+CREATE TRIGGER salario_minimo
+ON FUNCIONARIO
+INSTEAD OF INSERT
+AS
+BEGIN
+BEGIN TRANSACTION;
+	DECLARE @Pnome VARCHAR(15),
+			@Unome VARCHAR(15),
+			@CPF CHAR(11),
+			@Salario DECIMAL(10,2);
+
+	--setando os valores das variáveis
+	SELECT @Pnome = I.Pnome, @Unome = I.Unome, @CPF = I.Cpf, @Salario = I.Salario
+	FROM inserted as I;
+
+	--verificando se o salario é menor que 1000
+	IF (@Salario <= 1000)
+		BEGIN
+		ROLLBACK TRANSACTION;
+		RAISERROR('O salario nao pode ser menor que 1000',13,1);
+		END
+	ELSE
+		BEGIN
+		INSERT INTO FUNCIONARIO (Cpf, Pnome, Unome, Salario) VALUES (@CPF, @Pnome, @Unome, @Salario);
+		PRINT 'Funcionario inserido com sucesso';
+		COMMIT TRANSACTION;
+		END
+END
+
+INSERT INTO FUNCIONARIO (Cpf, Pnome, Unome, Salario) VALUES ( '27345676587', 'UEBAAAAA', 'dfhfh', 100);
+
