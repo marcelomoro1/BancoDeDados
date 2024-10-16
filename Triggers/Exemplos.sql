@@ -63,4 +63,28 @@ SELECT * FROM sys.triggers WHERE is_disabled = 0 OR is_disabled = 1;
 
 ------------------------------------------------------------------------------------------
 
+CREATE TRIGGER trigger_after_autores
+ON FUNCIONARIO
+AFTER INSERT, UPDATE
+AS
+	IF UPDATE(Pnome)
+		BEGIN
+		PRINT 'O nome foi alterado';
+		END
+	ELSE
+		BEGIN
+		PRINT 'Nome não foi modificado';
+		END
+
+------------------------------------------------------------------------------------------
+
+CREATE TRIGGER funcionario_log --insere na tabela log_funcionario os dados após inserir um funcionario
+ON FUNCIONARIO
+AFTER INSERT
+AS
+BEGIN
+	INSERT INTO LOG_FUNCIONARIO (Cpf, Operacao) SELECT I.Cpf, 'Insert' FROM inserted as I;
+
+END
+INSERT INTO FUNCIONARIO (Cpf, Pnome, Unome) VALUES ( '18343276545', 'afdfde', 'tthhh');
 
