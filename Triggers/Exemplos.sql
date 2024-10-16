@@ -78,7 +78,15 @@ AS
 
 ------------------------------------------------------------------------------------------
 
-CREATE TRIGGER funcionario_log --insere na tabela log_funcionario os dados após inserir um funcionario
+--insere na tabela Log_Funcionario os dados após inserir um funcionario
+CREATE TABLE Log_Funcionario(
+	LogID INT IDENTITY(1,1) PRIMARY KEY,
+	Cpf CHAR(11),
+	Operacao VARCHAR(10),
+	Data_Hora DATETIME DEFAULT GETDATE()
+);
+
+CREATE TRIGGER funcionario_log 
 ON FUNCIONARIO
 AFTER INSERT
 AS
